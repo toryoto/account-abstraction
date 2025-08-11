@@ -13,6 +13,7 @@ import "../core/BaseAccount.sol";
  * Simple7702Account.sol
  * A minimal account to be used with EIP-7702 (for batching) and ERC-4337 (for gas sponsoring)
  */
+// バッチトランザクションの実行とガス代のスポンサー機能を提供するシンプルなEIP-7702対応CA
 contract Simple7702Account is BaseAccount, IERC165, IERC1271, ERC1155Holder, ERC721Holder {
 
     // address of entryPoint v0.8

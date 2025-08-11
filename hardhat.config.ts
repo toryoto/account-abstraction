@@ -2,10 +2,11 @@ import '@nomiclabs/hardhat-waffle'
 import '@typechain/hardhat'
 import { HardhatUserConfig, task } from 'hardhat/config'
 import 'hardhat-deploy'
-
+import '@nomiclabs/hardhat-etherscan'
+import * as dotenv from 'dotenv'
 import 'solidity-coverage'
 
-import * as fs from 'fs'
+dotenv.config()
 
 const SALT = '0x0a59dbff790c23c976a548690c27297883cc66b4c67024f9117b0238995e35e9'
 process.env.SALT = process.env.SALT ?? SALT
@@ -13,20 +14,11 @@ process.env.SALT = process.env.SALT ?? SALT
 task('deploy', 'Deploy contracts')
   .addFlag('simpleAccountFactory', 'deploy sample factory (by default, enabled only on localhost)')
 
-const mnemonicFileName = process.env.MNEMONIC_FILE!
-let mnemonic = 'test '.repeat(11) + 'junk'
-if (fs.existsSync(mnemonicFileName)) { mnemonic = fs.readFileSync(mnemonicFileName, 'ascii') }
-
-function getNetwork1 (url: string): { url: string, accounts: { mnemonic: string } } {
+function getNetwork (name: string): { url: string, accounts: string[] } {
   return {
-    url,
-    accounts: { mnemonic }
+    url: `https://${name}.infura.io/v3/${process.env.INFURA_ID}`,
+    accounts: [process.env.PRIVATE_KEY]
   }
-}
-
-function getNetwork (name: string): { url: string, accounts: { mnemonic: string } } {
-  return getNetwork1(`https://${name}.infura.io/v3/${process.env.INFURA_ID}`)
-  // return getNetwork1(`wss://${name}.infura.io/ws/v3/${process.env.INFURA_ID}`)
 }
 
 const optimizedCompilerSettings = {
@@ -61,8 +53,10 @@ const config: HardhatUserConfig = {
     dev: { url: 'http://localhost:8545' },
     // github action starts localgeth service, for gas calculations
     localgeth: { url: 'http://localgeth:8545' },
-    sepolia: getNetwork('sepolia'),
-    proxy: getNetwork1('http://localhost:8545')
+    sepolia: getNetwork('sepolia')
+  },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_API_KEY
   },
   mocha: {
     timeout: 10000

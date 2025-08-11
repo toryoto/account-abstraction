@@ -55,17 +55,20 @@
     "@ethersproject/bytes": "^5.7.0",
     "@ethersproject/properties": "^5.7.0",
     "@ethersproject/providers": "^5.7.2",
+    "@nomiclabs/hardhat-etherscan": "^3.1.8",
     "@openzeppelin/contracts": "^5.1.0",
     "@typechain/hardhat": "^2.3.0",
     "@types/debug": "^4.1.12",
     "@types/mocha": "^9.0.0",
     "debug": "^4.3.4",
     "depcheck": "^1.4.7",
+    "dotenv": "^17.2.1",
     "ethereumjs-util": "^7.1.0",
     "hardhat-deploy": "^0.11.23",
     "mocha": "10.2.0",
     "solidity-coverage": "^0.8.14",
     "table": "^6.8.0",
     "typescript": "^4.3.5"
-  }
+  },
+  "packageManager": "yarn@1.22.19+sha512.ff4579ab459bb25aa7c0ff75b62acebe576f6084b36aa842971cf250a5d8c6cd3bc9420b22ce63c7f93a0857bc6ef29291db39c3e7a23aab5adfd5a4dd6c5d71"
 }

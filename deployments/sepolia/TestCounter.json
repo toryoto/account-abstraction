@@ -1,0 +1,178 @@
+{
+  "address": "0x7FfFfe05FeeA7902AffBe5D991800Dd9F3d0460F",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "CalledFrom",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "count",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "countFail",
+      "outputs": [],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "counters",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "repeat",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "name": "gasWaster",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "justemit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "offset",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "xxx",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "e6d9caa119ba9eb6269d1ac18c4e3cdf",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.28+commit.7893614a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"CalledFrom\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"count\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"countFail\",\"outputs\":[],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"counters\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"repeat\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"gasWaster\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"justemit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"offset\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"xxx\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/test/TestCounter.sol\":\"TestCounter\"},\"evmVersion\":\"cancun\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":1000000},\"remappings\":[],\"viaIR\":true},\"sources\":{\"contracts/test/TestCounter.sol\":{\"content\":\"// SPDX-License-Identifier: GPL-3.0\\npragma solidity ^0.8.28;\\n\\n// Sample \\\"receiver\\\" contract, for testing \\\"exec\\\" from account.\\ncontract TestCounter {\\n    mapping(address => uint256) public counters;\\n\\n    function count() public {\\n        counters[msg.sender] = counters[msg.sender] + 1;\\n    }\\n\\n    function countFail() public pure {\\n        revert(\\\"count failed\\\");\\n    }\\n\\n    function justemit() public {\\n        emit CalledFrom(msg.sender);\\n    }\\n\\n    event CalledFrom(address sender);\\n\\n    // Helper method to waste gas\\n    // repeat - waste gas on writing storage in a loop\\n    // junk - dynamic buffer to stress the function size.\\n    mapping(uint256 => uint256) public xxx;\\n    uint256 public offset;\\n\\n    function gasWaster(uint256 repeat, string calldata /*junk*/) external {\\n        for (uint256 i = 1; i <= repeat; i++) {\\n            offset++;\\n            xxx[offset] = i;\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0xe94d8da4342b1f39117040fba520f3863d2c5200a7ababea5d2f3b84c6e31289\",\"license\":\"GPL-3.0\"}},\"version\":1}",
+  "bytecode": "0x608080604052346015576103c2908161001a8239f35b5f80fdfe60806040526004361015610011575f80fd5b5f3560e01c806306661abd146102dd578063278ddd3c14610283578063a1b46890146101de578063a5e9585f14610196578063be65ab8c14610131578063caece693146100a55763d555654414610066575f80fd5b346100a1575f7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc3601126100a1576020600254604051908152f35b5f80fd5b346100a1575f7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc3601126100a15760646040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152600c60248201527f636f756e74206661696c656400000000000000000000000000000000000000006044820152fd5b346100a15760207ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc3601126100a15760043573ffffffffffffffffffffffffffffffffffffffff81168091036100a1575f525f602052602060405f2054604051908152f35b346100a15760207ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc3601126100a1576004355f526001602052602060405f2054604051908152f35b346100a15760407ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc3601126100a15760043560243567ffffffffffffffff81116100a157366023820112156100a157806004013567ffffffffffffffff81116100a157369101602401116100a15760015b8181111561025957005b61027e9061026860025461035f565b806002555f5260016020528060405f205561035f565b61024f565b346100a1575f7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc3601126100a1577ffb3b4d6258432a9a3d78dd9bffbcb6cfb1bd94f58da35fd530d08da7d1d058326020604051338152a1005b346100a1575f7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc3601126100a157335f525f60205260405f20546001810180911161033257335f525f60205260405f20555f80f35b7f4e487b71000000000000000000000000000000000000000000000000000000005f52601160045260245ffd5b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8114610332576001019056fea2646970667358221220551f6c136094ed967ef5882b574d783c3fea16e6a81f3da0b2b8a9d8fcc9ca7f64736f6c634300081c0033",
+  "deployedBytecode": "0x60806040526004361015610011575f80fd5b5f3560e01c806306661abd146102dd578063278ddd3c14610283578063a1b46890146101de578063a5e9585f14610196578063be65ab8c14610131578063caece693146100a55763d555654414610066575f80fd5b346100a1575f7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc3601126100a1576020600254604051908152f35b5f80fd5b346100a1575f7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc3601126100a15760646040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152600c60248201527f636f756e74206661696c656400000000000000000000000000000000000000006044820152fd5b346100a15760207ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc3601126100a15760043573ffffffffffffffffffffffffffffffffffffffff81168091036100a1575f525f602052602060405f2054604051908152f35b346100a15760207ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc3601126100a1576004355f526001602052602060405f2054604051908152f35b346100a15760407ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc3601126100a15760043560243567ffffffffffffffff81116100a157366023820112156100a157806004013567ffffffffffffffff81116100a157369101602401116100a15760015b8181111561025957005b61027e9061026860025461035f565b806002555f5260016020528060405f205561035f565b61024f565b346100a1575f7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc3601126100a1577ffb3b4d6258432a9a3d78dd9bffbcb6cfb1bd94f58da35fd530d08da7d1d058326020604051338152a1005b346100a1575f7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc3601126100a157335f525f60205260405f20546001810180911161033257335f525f60205260405f20555f80f35b7f4e487b71000000000000000000000000000000000000000000000000000000005f52601160045260245ffd5b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8114610332576001019056fea2646970667358221220551f6c136094ed967ef5882b574d783c3fea16e6a81f3da0b2b8a9d8fcc9ca7f64736f6c634300081c0033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 11569,
+        "contract": "contracts/test/TestCounter.sol:TestCounter",
+        "label": "counters",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 11610,
+        "contract": "contracts/test/TestCounter.sol:TestCounter",
+        "label": "xxx",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_uint256,t_uint256)"
+      },
+      {
+        "astId": 11612,
+        "contract": "contracts/test/TestCounter.sol:TestCounter",
+        "label": "offset",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_uint256"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_mapping(t_uint256,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

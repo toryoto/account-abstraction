@@ -22,19 +22,18 @@ contract SimpleAccountFactory {
         senderCreator = _entryPoint.senderCreator();
     }
 
-    /**
-     * create an account, and return its address.
-     * returns the address even if the account is already deployed.
-     * Note that during UserOperation execution, this method is called only if the account is not deployed.
-     * This method returns an existing account address so that entryPoint.getSenderAddress() would work even after account creation
-     */
+    // ERC4337対応のアカウントをデプロイしてアドレスを返すメソッド
+    // すでに作成済みの場合はそのアドレスを返す
+    // CREATE2を使用することで決定論的なアドレス作成をする
     function createAccount(address owner,uint256 salt) public returns (SimpleAccount ret) {
         require(msg.sender == address(senderCreator), "only callable from SenderCreator");
         address addr = getAddress(owner, salt);
         uint256 codeSize = addr.code.length;
+        // すでにアカウントがデプロイされている場合は既存のアドレスを返す
         if (codeSize > 0) {
             return SimpleAccount(payable(addr));
         }
+        // プロキシパターンでアカウントをデプロイ
         ret = SimpleAccount(payable(new ERC1967Proxy{salt : bytes32(salt)}(
                 address(accountImplementation),
                 abi.encodeCall(SimpleAccount.initialize, (owner))

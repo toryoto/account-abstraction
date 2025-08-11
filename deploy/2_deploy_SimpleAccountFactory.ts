@@ -6,19 +6,22 @@ const deploySimpleAccountFactory: DeployFunction = async function (hre: HardhatR
   const provider = ethers.provider
   const from = await provider.getSigner().getAddress()
   const network = await provider.getNetwork()
-  // only deploy on local test network.
 
-  const forceDeployFactory = process.argv.join(' ').match(/simple-account-factory/) != null
+  const isSepolia = network.chainId === 11155111
 
-  if (!forceDeployFactory && network.chainId !== 31337 && network.chainId !== 1337) {
+  if (!isSepolia) {
+    console.log(`Skipping deployment on network with chainId: ${network.chainId}`)
     return
   }
 
-  const entrypoint = await hre.deployments.get('EntryPoint')
+  console.log(`Deploying SimpleAccountFactory on network: ${network.name} (chainId: ${network.chainId})`)
+
+  const entrypointAddress = '0x4337084d9e255ff0702461cf8895ce9e3b5ff108'
+
   await hre.deployments.deploy(
     'SimpleAccountFactory', {
       from,
-      args: [entrypoint.address],
+      args: [entrypointAddress],
       gasLimit: 6e6,
       log: true,
       deterministicDeployment: true
@@ -30,5 +33,7 @@ const deploySimpleAccountFactory: DeployFunction = async function (hre: HardhatR
     log: true
   })
 }
+
+deploySimpleAccountFactory.tags = ['simple-account-factory']
 
 export default deploySimpleAccountFactory
