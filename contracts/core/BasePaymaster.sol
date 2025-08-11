@@ -8,11 +8,8 @@ import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 import "../interfaces/IPaymaster.sol";
 import "../interfaces/IEntryPoint.sol";
 import "./UserOperationLib.sol";
-/**
- * Helper class for creating a paymaster.
- * provides helper methods for staking.
- * Validates that the postOp is called only by the entryPoint.
- */
+
+// Paymaster実装の抽象コントラクト
 abstract contract BasePaymaster is IPaymaster, Ownable2Step {
     IEntryPoint public immutable entryPoint;
 
