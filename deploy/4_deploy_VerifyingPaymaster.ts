@@ -34,10 +34,6 @@ const deployVerifyingPaymaster: DeployFunction = async function (hre: HardhatRun
     })
 
   console.log('==VerifyingPaymaster addr=', ret.address)
-
-  const paymaster = await ethers.getContractAt('VerifyingPaymaster', ret.address)
-  await paymaster.transferOwnership(from)
-  console.log(`Ownership transferred to: ${from}`)
 }
 
 deployVerifyingPaymaster.tags = ['verifying-paymaster']
